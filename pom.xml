@@ -14,8 +14,9 @@
 	<name>cosmo-service</name>
 	<description>Back end to handle CRUD + websocket for clients</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>11</java.version>
 		<spring-cloud-azure.version>4.6.0</spring-cloud-azure.version>
+		<maven.compiler.target>11</maven.compiler.target>
 	</properties>
 	<dependencies>
 		<dependency>

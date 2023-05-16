@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "http://192.168.0.38:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CrudController {
     private final GameSessionRepository gameSessionRepository;
     // TODO: Attempt deleting document from db, refactor into service for controller.
@@ -24,7 +24,23 @@ public class CrudController {
 
     public CrudController(GameSessionRepository gameSessionRepository) {
         this.gameSessionRepository = gameSessionRepository;
+    }
 
+    @GetMapping("/account/active/{googleId}")
+    boolean checkIfActiveAccount(@PathVariable String googleId) {
+        // This end point will be used to check database for existing google ID
+        // Return boolean based on search results.
+
+        // Below ID is for personal email
+        // This is to mimic a database query
+        return googleId.equals("117961479542614585037");
+    }
+
+    @GetMapping("/account/{googleId}/type")
+    String getAccountType(@PathVariable String googleId) {
+        // Hard coding my personal email to be the parent account
+        // Any other will act as a therapist for now.
+        return googleId.equals("117961479542614585037") ? "parent" : "therapist";
     }
 
     @GetMapping("/test")
