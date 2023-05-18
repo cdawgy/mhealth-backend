@@ -26,28 +26,6 @@ public class CrudController {
         this.gameSessionRepository = gameSessionRepository;
     }
 
-    @GetMapping("/account/active/{googleId}")
-    boolean checkIfActiveAccount(@PathVariable String googleId) {
-        // This end point will be used to check database for existing google ID
-        // Return boolean based on search results.
-
-        // Below ID is for personal email
-        // This is to mimic a database query
-        return googleId.equals("117961479542614585037");
-    }
-
-    @GetMapping("/account/{googleId}/type")
-    String getAccountType(@PathVariable String googleId) {
-        // Hard coding my personal email to be the parent account
-        // Any other will act as a therapist for now.
-        return googleId.equals("117961479542614585037") ? "parent" : "therapist";
-    }
-
-    @GetMapping("/test")
-    String test() {
-        return "HTTPS!!";
-    }
-
     @GetMapping("/gameSession/{id}")
     Mono<GameSessionModel> findGameSessionById(@PathVariable String id) {
         Mono<GameSessionModel> gameSessionModelMono = gameSessionRepository.findById(id);
