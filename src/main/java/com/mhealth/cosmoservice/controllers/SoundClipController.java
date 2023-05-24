@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RequestMapping("/soundClips")
 public class SoundClipController {
     private final SoundClipService soundClipService;

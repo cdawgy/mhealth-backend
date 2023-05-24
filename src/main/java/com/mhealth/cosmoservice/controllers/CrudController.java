@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class CrudController {
     private final GameSessionRepository gameSessionRepository;
     // TODO: Attempt deleting document from db, refactor into service for controller.
