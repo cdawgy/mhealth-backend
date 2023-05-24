@@ -1,6 +1,8 @@
 package main.java.com.mhealth.cosmoservice.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import main.java.com.mhealth.cosmoservice.models.WordPair;
+import main.java.com.mhealth.cosmoservice.services.GameService;
 import main.java.com.mhealth.cosmoservice.services.TherapistService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,16 +14,16 @@ import java.util.ArrayList;
 @Slf4j
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/therapist")
-public class TherapistController {
-    private TherapistService therapistService;
+@RequestMapping("/game")
+public class GameController {
+    private GameService gameService;
 
-    public TherapistController(TherapistService therapistServices) {
-        this.therapistService = therapistServices;
+    public GameController(GameService gameService) {
+        this.gameService = gameService;
     }
 
-    @GetMapping("/patients")
-    public ArrayList<String> getAllTherapistsPatients() {
-        return therapistService.getAllTherapistsPatients();
+    @GetMapping("/wordPairs")
+    public ArrayList<WordPair> getAllWordPairs() {
+        return gameService.getAllWordPairs();
     }
 }
