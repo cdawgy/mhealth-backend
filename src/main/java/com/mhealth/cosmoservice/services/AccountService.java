@@ -1,24 +1,40 @@
 package main.java.com.mhealth.cosmoservice.services;
 
+import main.java.com.mhealth.cosmoservice.InMemoryDatabase;
 import main.java.com.mhealth.cosmoservice.models.Account;
+import main.java.com.mhealth.cosmoservice.models.AccountData;
+import main.java.com.mhealth.cosmoservice.models.Award;
+import main.java.com.mhealth.cosmoservice.models.Parent;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountService {
-    private final ArrayList<Account> listOfAccounts;
-
     public AccountService(){
-        listOfAccounts = new ArrayList<>();
-        var parentAccount = Account.builder().accountId("117961479542614585037").accountType("parent").build();
-        var therapistAccount = Account.builder().accountId("109020841686505071523").accountType("therapist").build();
-        listOfAccounts.add(parentAccount);
-        listOfAccounts.add(therapistAccount);
     }
 
     public Optional<Account> findAccount(String accountId) {
-        return listOfAccounts.stream().filter((account -> account.getAccountId().equals(accountId))).findFirst();
+        return InMemoryDatabase.AccountTable.stream().filter((account -> account.getAccountId().equals(accountId))).findFirst();
+    }
+
+    public AccountData findAccountData(String googleId) {
+        return InMemoryDatabase.AccountDataTable.stream().filter(accountData -> accountData.getGoogleId().equalsIgnoreCase(googleId)).findFirst().orElseGet(null);
+    }
+
+    public Map<Integer, Award[]> getGroupedAwards(String googleId) {
+        var parent = (Parent)findAccountData(googleId);
+        return parent.getListOfAwards()
+                .stream()
+                .collect(
+                        Collectors.groupingBy(
+                                Award::getAwardCost,
+                                Collectors.collectingAndThen(
+                                        Collectors.toList(),
+                                        tl -> tl.toArray(new Award[0])
+                                )
+                        )
+                );
     }
 }
