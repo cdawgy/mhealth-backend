@@ -1,9 +1,15 @@
 package main.java.com.mhealth.cosmoservice.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import main.java.com.mhealth.cosmoservice.models.Account;
 import main.java.com.mhealth.cosmoservice.models.Award;
-import main.java.com.mhealth.cosmoservice.models.payloads.TherapistData;
+import main.java.com.mhealth.cosmoservice.models.Child;
+import main.java.com.mhealth.cosmoservice.models.Parent;
+import main.java.com.mhealth.cosmoservice.models.payloads.AccountId;
+import main.java.com.mhealth.cosmoservice.models.payloads.AwardRequest;
+import main.java.com.mhealth.cosmoservice.models.payloads.NewAccount;
 import main.java.com.mhealth.cosmoservice.services.AccountService;
+import main.java.com.mhealth.cosmoservice.services.AwardsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -14,42 +20,77 @@ import java.util.*;
 @RequestMapping("/account")
 public class AccountController {
     private final AccountService accountService;
+    private final AwardsService awardsService;
 
-    public AccountController(AccountService accountService) {
+    public AccountController(AccountService accountService, AwardsService awardsService) {
         this.accountService = accountService;
+        this.awardsService = awardsService;
+    }
+
+    @PostMapping("/create")
+    Account createNewAccount(@RequestBody NewAccount newAccount) {
+        if (newAccount.getAccountType().equalsIgnoreCase("parent")) {
+            var newChild = accountService.createChildRecord(newAccount.getChildsName());
+            var newParent = accountService.createParentRecord(
+                    newAccount.getGoogleId(),
+                    newAccount.getFirstName(),
+                    newAccount.getSurname(),
+                    newAccount.getSelectedTherapist(),
+                    Math.toIntExact(newChild.getId())
+            );
+            accountService.updateChildRecordWithParentId(newChild.getId(), Math.toIntExact(newParent.getId()));
+            return accountService.createNewAccount(newAccount.getGoogleId(), newAccount.getAccountType());
+        } else {
+            return accountService.createNewAccount(newAccount.getGoogleId(), newAccount.getAccountType());
+        }
     }
 
     @GetMapping("/{googleId}/active")
     boolean checkIfActiveAccount(@PathVariable String googleId) {
-        // This end point will be used to check database for existing google ID
-        // Return boolean based on search results.
-
-        // Below ID is for personal email
-        // This is to mimic a database query
         var returnedAccount = accountService.findAccount(googleId);
         return returnedAccount.isPresent();
     }
 
     @GetMapping("/{googleId}/type")
     String getAccountType(@PathVariable String googleId) {
-        // Hard coding my personal email to be the parent account
-        // Any other will act as a therapist for now.
         var returnedAccount = accountService.findAccount(googleId);
-        return returnedAccount.get().getAccountType();
+        return returnedAccount.isPresent() ? returnedAccount.get().getAccountType() : null;
     }
 
-//    @PostMapping("/awards")
-//    ArrayList<Award> getAllAwardsRaw(@RequestBody TherapistData therapistData) {
-//        // This will search the accounts db for a document that has the given google ID.
-//        // If it finds one, it will return that accounts data, be it a therapist or parent.
-//        var returnedAccount = (Parent)accountService.findAccountData(therapistData.getGoogleId());
-//        return returnedAccount.getListOfAwards();
-//    }
+    @GetMapping("/{accountType}/{googleId}")
+    Long getAccountTableReferenceId(@PathVariable String accountType, @PathVariable String googleId) {
+        if (accountType.equalsIgnoreCase("parent")) {
+            return accountService.findParentAccount(googleId).getId();
+        } else if (accountType.equalsIgnoreCase("therapist")) {
+            // TODO: Update this to therapist
+            return accountService.findTherapistAccount(googleId).getId();
+        }
+        return null;
+    }
 
     @PostMapping("/awards")
-    Map<Integer, Award[]> getList(@RequestBody TherapistData therapistData) {
-        // This will search the accounts db for a document that has the given google ID.
-        // If it finds one, it will return that accounts data, be it a therapist or parent.
-        return accountService.getGroupedAwards(therapistData.getGoogleId());
+    HashMap<Integer, List<Award>> getAllAccountAwards(@RequestBody AccountId accountId) {
+        var listOfAwards = awardsService.getAllAwardsForId(accountId.getId());
+        var groupedAwards = new HashMap<Integer, List<Award>>();
+        listOfAwards.forEach(award -> {
+            if (!groupedAwards.containsKey(award.getCost())) {
+                var listGroupedByAwardCost = new ArrayList<Award>();
+                listGroupedByAwardCost.add(award);
+
+                groupedAwards.put(award.getCost(), listGroupedByAwardCost);
+            } else {
+                groupedAwards.get(award.getCost()).add(award);
+            }
+        });
+        return groupedAwards;
+    }
+
+    @PostMapping("/awards/create")
+    void createNewAward(@RequestBody Award award) {
+        var newAward = new Award();
+        newAward.setCost(award.getCost());
+        newAward.setParentId(award.getParentId());
+        newAward.setTitle(award.getTitle());
+        awardsService.createNewAward(newAward);
     }
 }

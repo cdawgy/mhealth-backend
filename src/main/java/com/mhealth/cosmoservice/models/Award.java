@@ -1,11 +1,26 @@
 package main.java.com.mhealth.cosmoservice.models;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Builder
-@Data
+import javax.persistence.*;
+
+@Entity
+@Table(name = "awards", schema = "MHEALTH")
+@Getter
+@Setter
 public class Award {
-    private int awardCost;
-    private String awardTitle;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column(name = "parent_id")
+    private int parentId;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "cost")
+    private int cost;
 }

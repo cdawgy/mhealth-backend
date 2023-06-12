@@ -1,19 +1,24 @@
 package main.java.com.mhealth.cosmoservice.models;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.ArrayList;
+import javax.persistence.*;
+@Entity
+@Table(name = "therapists", schema = "MHEALTH")
+@Getter
+@Setter
+public class Therapist {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
-@NoArgsConstructor
-public class Therapist extends AccountData {
-    public Therapist(String googleId, String firstname, String surname) {
-        super(googleId, firstname, surname);
-    }
+    @Column(name = "google_id")
+    private String googleId;
 
-    private ArrayList<String> listOfPatientsIds;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "surname")
+    private String surname;
 }

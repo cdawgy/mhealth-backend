@@ -1,23 +1,26 @@
 package main.java.com.mhealth.cosmoservice.services;
 
-import main.java.com.mhealth.cosmoservice.InMemoryDatabase;
 import main.java.com.mhealth.cosmoservice.models.Resource;
+import main.java.com.mhealth.cosmoservice.repositories.ResourceRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ResourcesService {
-    public ResourcesService() {
+    private ResourceRepository resourceRepository;
 
+    public ResourcesService(ResourceRepository resourceRepository) {
+        this.resourceRepository = resourceRepository;
     }
 
-    public ArrayList<Resource> listAllResources() {
-        return InMemoryDatabase.ResourceTable;
+    public List<Resource> listAllResources() {
+        return resourceRepository.findAll();
     }
 
-    public Resource getResourceById(int resourceId) {
-        var optionalResource = InMemoryDatabase.ResourceTable.stream().filter(resource -> resource.getId() == resourceId).findAny();
-        return optionalResource.orElse(null);
+    public Resource getResourceById(Long resourceId) {
+//        var optionalResource = InMemoryDatabase.ResourceTable.stream().filter(resource -> resource.getId() == resourceId).findAny();
+//        return optionalResource.orElse(null);
+        return resourceRepository.findById(resourceId).orElse(null);
     }
 }

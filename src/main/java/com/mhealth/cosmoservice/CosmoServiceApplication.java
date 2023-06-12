@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CosmoServiceApplication {
 
 	public static void main(String[] args) {
-		InMemoryDatabase.InitInMemoryDatabase();
 		SpringApplication.run(CosmoServiceApplication.class, args);
 	}
 

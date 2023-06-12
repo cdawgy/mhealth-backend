@@ -5,7 +5,7 @@ import main.java.com.mhealth.cosmoservice.models.Resource;
 import main.java.com.mhealth.cosmoservice.services.ResourcesService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -20,12 +20,12 @@ public class ResourcesController {
     }
 
     @GetMapping("/all")
-    public ArrayList<Resource> getResources() {
+    public List<Resource> getResources() {
         return resourcesService.listAllResources();
     }
 
     @GetMapping("/resource/{resourceId}")
-    public Resource getResourceById(@PathVariable int resourceId) {
+    public Resource getResourceById(@PathVariable Long resourceId) {
         return resourcesService.getResourceById(resourceId);
     }
 }

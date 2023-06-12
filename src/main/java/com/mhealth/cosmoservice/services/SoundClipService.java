@@ -1,23 +1,27 @@
 package main.java.com.mhealth.cosmoservice.services;
 
-import main.java.com.mhealth.cosmoservice.InMemoryDatabase;
 import main.java.com.mhealth.cosmoservice.models.SoundClip;
+import main.java.com.mhealth.cosmoservice.repositories.SoundsRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SoundClipService {
-    public SoundClipService(){
+    private SoundsRepository soundsRepository;
 
+    public SoundClipService(SoundsRepository soundsRepository) {
+        this.soundsRepository = soundsRepository;
     }
 
-    public ArrayList<SoundClip> getAllSoundClips() {
-        return InMemoryDatabase.SoundClipTable;
+    public List<SoundClip> getAllSoundClips() {
+//        return InMemoryDatabase.SoundClipTable;
+        return soundsRepository.findAll();
     }
 
-    public SoundClip getSoundClip(int clipId) {
-        var optionalClip = InMemoryDatabase.SoundClipTable.stream().filter(soundClip -> soundClip.getId() == clipId).findAny();
-        return optionalClip.orElse(null);
+    public SoundClip getSoundClip(Long clipId) {
+//        var optionalClip = InMemoryDatabase.SoundClipTable.stream().filter(soundClip -> soundClip.getId() == clipId).findAny();
+//        return optionalClip.orElse(null);
+        return soundsRepository.findById(clipId).orElse(null);
     }
 }

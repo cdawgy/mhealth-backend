@@ -1,11 +1,22 @@
 package main.java.com.mhealth.cosmoservice.models;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Builder
-@Data
+import javax.persistence.*;
+
+@Entity
+@Table(name = "accounts", schema = "MHEALTH")
+@Getter
+@Setter
 public class Account {
-    private String accountId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column(name = "google_id")
+    private String googleId;
+    @Column(name = "account_type")
     private String accountType;
 }

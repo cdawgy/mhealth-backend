@@ -6,6 +6,7 @@ import main.java.com.mhealth.cosmoservice.services.SoundClipService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -19,12 +20,12 @@ public class SoundClipController {
     }
 
     @GetMapping("/all")
-    public ArrayList<SoundClip> getAllSoundClips() {
+    public List<SoundClip> getAllSoundClips() {
         return soundClipService.getAllSoundClips();
     }
 
     @GetMapping("/clip/{clipId}")
-    public SoundClip getAllSoundClips(@PathVariable int clipId) {
+    public SoundClip getAllSoundClips(@PathVariable Long clipId) {
         return soundClipService.getSoundClip(clipId);
     }
 }
