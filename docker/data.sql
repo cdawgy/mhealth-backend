@@ -71,7 +71,6 @@ CREATE TABLE messages(
     PRIMARY KEY(id)
 );
 
-
 -- conorloughran99 account
 INSERT INTO accounts(google_id, account_type) VALUES ("117961479542614585037", "parent");
 -- mhealth account
