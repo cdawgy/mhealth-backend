@@ -36,7 +36,7 @@ public class MessageService {
     }
 
     public Message getMessageOfId(int messageId) {
-        return messageRepository.getReferenceById((long) messageId);
+        return messageRepository.findById((long) messageId).orElse(null);
     }
 
     public void readMessage(int messageId) {

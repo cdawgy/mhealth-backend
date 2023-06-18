@@ -71,6 +71,14 @@ CREATE TABLE messages(
     PRIMARY KEY(id)
 );
 
+CREATE TABLE words(
+    id int NOT NULL AUTO_INCREMENT,
+    word VARCHAR(255) NOT NULL,
+    phonemes VARCHAR(255) NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+    PRIMARY KEY(id)
+);
+
 -- conorloughran99 account
 INSERT INTO accounts(google_id, account_type) VALUES ("117961479542614585037", "parent");
 -- mhealth account
@@ -101,3 +109,81 @@ INSERT INTO awards(parent_id, title, cost) VALUES (1, "Go to toy store", 7);
 INSERT INTO awards(parent_id, title, cost) VALUES (1, "Go to park", 5);
 INSERT INTO awards(parent_id, title, cost) VALUES (1, "1 hour on games", 3);
 INSERT INTO awards(parent_id, title, cost) VALUES (1, "coca cola & chocolate", 3);
+
+-- Words
+-- Velar Fronting
+-- /k/ vs /t/
+INSERT INTO words(word, phonemes, image_url) VALUES ("call", "/k/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("tall", "/t/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("can", "/k/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("tan", "/t/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("cape", "/k/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("tape", "/t/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("cap", "/k/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("tap", "/t/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("car", "/k/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("tar", "/t/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("cool", "/k/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("tool", "/t/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("core", "/k/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("tore", "/t/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("key", "/k/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("tea", "/t/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("kick", "/k/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("tick", "/t/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("kite", "/k/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("tight", "/t/", "");
+
+-- /k/ and /g/ vs /d/ and /g/
+INSERT INTO words(word, phonemes, image_url) VALUES ("bad", "/d/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("bag", "/g/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("bike", "/k/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("bite", "/t/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("coat", "/k/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("coke", "/k/", "");
+
+-- Stopping of Fricatives
+-- /f/ vs /b/
+INSERT INTO words(word, phonemes, image_url) VALUES ("fair", "/f/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("bear", "/b/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("fig", "/f/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("big", "/b/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("phone", "/f/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("bone", "/b/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("fox", "/f/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("box", "/b/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("fun", "/f/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("bun", "/b/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("foal", "/f/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("bowl", "/b/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("fat", "/f/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("bat", "/b/", "");
+
+------ /f/ vs /p/
+INSERT INTO words(word, phonemes, image_url) VALUES ("pig", "/p/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("fin", "/f/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("pin", "/p/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("fan", "/f/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("pan", "/p/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("pole", "/p/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("fur", "/f/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("purr", "/p/", "");
+
+-- /s/ vs /d/
+INSERT INTO words(word, phonemes, image_url) VALUES ("sore", "/s/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("door", "/d/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("sea", "/s/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("dee", "/d/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("sew", "/s/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("dough", "/d/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("suck", "/s/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("duck", "/d/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("sock", "/s/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("dock", "/d/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("cee", "/s/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("dee", "/d/", "");
+
+-- /s/ vs /t/
+INSERT INTO words(word, phonemes, image_url) VALUES ("toe", "/t/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("tail", "/t/", "");
+INSERT INTO words(word, phonemes, image_url) VALUES ("tower", "/t/", "");
