@@ -1,15 +1,15 @@
-CREATE DATABASE IF NOT EXISTS MHEALTH;
+create DATABASE IF NOT EXISTS MHEALTH;
 
 USE MHEALTH;
 
-CREATE TABLE accounts(
+create TABLE accounts(
     id int NOT NULL AUTO_INCREMENT,
     google_id VARCHAR(255) NOT NULL,
     account_type VARCHAR(255) NOT NULL,
     PRIMARY KEY(id)
 );
 
-CREATE TABLE therapists(
+create TABLE therapists(
     id int NOT NULL AUTO_INCREMENT,
     google_id VARCHAR(255) NOT NULL,
     first_name VARCHAR(255) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE therapists(
     PRIMARY KEY(id)
 );
 
-CREATE TABLE children(
+create TABLE children(
     id int NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(255) NOT NULL,
     points int NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE children(
     PRIMARY KEY(id)
 );
 
-CREATE TABLE parents(
+create TABLE parents(
     id int NOT NULL AUTO_INCREMENT,
     google_id VARCHAR(255) NOT NULL,
     first_name VARCHAR(255) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE parents(
     PRIMARY KEY(id)
 );
 
-CREATE TABLE awards(
+create TABLE awards(
     id int NOT NULL AUTO_INCREMENT,
     parent_id int REFERENCES parents(id),
     title VARCHAR (255) NOT NULL,
@@ -45,14 +45,14 @@ CREATE TABLE awards(
 
 -- Need to revisit this for storage of content, 255 is too small
 -- Think I will break each topic into its own block to store?
-CREATE TABLE resources(
+create TABLE resources(
     id int NOT NULL AUTO_INCREMENT,
     title VARCHAR (255) NOT NULL,
     content VARCHAR(255) NOT NULL,
     PRIMARY KEY(id)
 );
 
-CREATE TABLE sounds(
+create TABLE sounds(
     id int NOT NULL AUTO_INCREMENT,
     child_id int REFERENCES children(id),
     sound VARCHAR (255) NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE sounds(
     PRIMARY KEY(id)
 );
 
-CREATE TABLE messages(
+create TABLE messages(
     id int NOT NULL AUTO_INCREMENT,
     parent_id int REFERENCES parents(id),
     resource_id int REFERENCES resources(id),
@@ -71,7 +71,7 @@ CREATE TABLE messages(
     PRIMARY KEY(id)
 );
 
-CREATE TABLE words(
+create TABLE words(
     id int NOT NULL AUTO_INCREMENT,
     word VARCHAR(255) NOT NULL,
     phonemes VARCHAR(255) NOT NULL,
@@ -79,111 +79,124 @@ CREATE TABLE words(
     PRIMARY KEY(id)
 );
 
+create TABLE prescriptions(
+    id int NOT NULL AUTO_INCREMENT,
+    parent_id int REFERENCES parents(id),
+    therapist_id int REFERENCES therapists(id),
+    session_time int NOT NULL,
+    session_word_count int NOT NULL,
+    session_word_set VARCHAR(255) NOT NULL,
+    PRIMARY KEY(id)
+);
+
 -- conorloughran99 account
-INSERT INTO accounts(google_id, account_type) VALUES ("117961479542614585037", "parent");
+insert into accounts(google_id, account_type) values ("117961479542614585037", "parent");
 -- mhealth account
-INSERT INTO accounts(google_id, account_type) VALUES ("109020841686505071523", "therapist");
+insert into accounts(google_id, account_type) values ("109020841686505071523", "therapist");
 
 -- Data for therapist account
-INSERT INTO therapists(google_id, first_name, surname) VALUES ("109020841686505071523", "Dylan", "McDonnell");
+insert into therapists(google_id, first_name, surname) values ("109020841686505071523", "Dylan", "McDonnell");
 
 -- Child account for above parent
-INSERT INTO children(first_name, points, parent_id) VALUES ("Sam", 2, 1);
+insert into children(first_name, points, parent_id) values ("Sam", 2, 1);
 
 -- Parent account
-INSERT INTO parents(google_id, first_name, surname, child_id, therapist_id) VALUES ("117961479542614585037", "Conor", "Loughran", 1, 1);
+insert into parents(google_id, first_name, surname, child_id, therapist_id) values ("117961479542614585037", "Conor", "Loughran", 1, 1);
 
 -- Resources
-INSERT INTO resources(title, content) VALUES ("Some Resource 1", "This is the content of the resource");
-INSERT INTO resources(title, content) VALUES ("Some Resource 2", "This is the content of the resource");
+insert into resources(title, content) values ("Some Resource 1", "This is the content of the resource");
+insert into resources(title, content) values ("Some Resource 2", "This is the content of the resource");
 
 -- Sound Clips
-INSERT INTO sounds(child_id, sound, word, location_url) VALUES (1, "ee", "Tea", "https://mhealthstorageaccount.blob.core.windows.net/sound-store/d720ca41-d80c-4afa-8414-5a46ec234590");
-INSERT INTO sounds(child_id, sound, word, location_url) VALUES (1, "ee", "Pea", "https://mhealthstorageaccount.blob.core.windows.net/sound-store/d720ca41-d80c-4afa-8414-5a46ec234590");
-INSERT INTO sounds(child_id, sound, word, location_url) VALUES (1, "ø", "Soap", "https://mhealthstorageaccount.blob.core.windows.net/sound-store/d720ca41-d80c-4afa-8414-5a46ec234590");
-INSERT INTO sounds(child_id, sound, word, location_url) VALUES (1, "ø", "Pope", "https://mhealthstorageaccount.blob.core.windows.net/sound-store/d720ca41-d80c-4afa-8414-5a46ec234590");
+insert into sounds(child_id, sound, word, location_url) values (1, "ee", "Tea", "https://mhealthstorageaccount.blob.core.windows.net/sound-store/d720ca41-d80c-4afa-8414-5a46ec234590");
+insert into sounds(child_id, sound, word, location_url) values (1, "ee", "Pea", "https://mhealthstorageaccount.blob.core.windows.net/sound-store/d720ca41-d80c-4afa-8414-5a46ec234590");
+insert into sounds(child_id, sound, word, location_url) values (1, "ø", "Soap", "https://mhealthstorageaccount.blob.core.windows.net/sound-store/d720ca41-d80c-4afa-8414-5a46ec234590");
+insert into sounds(child_id, sound, word, location_url) values (1, "ø", "Pope", "https://mhealthstorageaccount.blob.core.windows.net/sound-store/d720ca41-d80c-4afa-8414-5a46ec234590");
 
 -- Awards
-INSERT INTO awards(parent_id, title, cost) VALUES (1, "Go to cinema", 7);
-INSERT INTO awards(parent_id, title, cost) VALUES (1, "Go to toy store", 7);
-INSERT INTO awards(parent_id, title, cost) VALUES (1, "Go to park", 5);
-INSERT INTO awards(parent_id, title, cost) VALUES (1, "1 hour on games", 3);
-INSERT INTO awards(parent_id, title, cost) VALUES (1, "coca cola & chocolate", 3);
+insert into awards(parent_id, title, cost) values (1, "Go to cinema", 7);
+insert into awards(parent_id, title, cost) values (1, "Go to toy store", 7);
+insert into awards(parent_id, title, cost) values (1, "Go to park", 5);
+insert into awards(parent_id, title, cost) values (1, "1 hour on games", 3);
+insert into awards(parent_id, title, cost) values (1, "coca cola & chocolate", 3);
 
 -- Words
 -- Velar Fronting
 -- /k/ vs /t/
-INSERT INTO words(word, phonemes, image_url) VALUES ("call", "/k/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("tall", "/t/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("can", "/k/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("tan", "/t/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("cape", "/k/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("tape", "/t/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("cap", "/k/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("tap", "/t/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("car", "/k/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("tar", "/t/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("cool", "/k/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("tool", "/t/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("core", "/k/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("tore", "/t/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("key", "/k/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("tea", "/t/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("kick", "/k/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("tick", "/t/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("kite", "/k/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("tight", "/t/", "");
+insert into words(word, phonemes, image_url) values ("call", "/k/", "");
+insert into words(word, phonemes, image_url) values ("tall", "/t/", "");
+insert into words(word, phonemes, image_url) values ("can", "/k/", "");
+insert into words(word, phonemes, image_url) values ("tan", "/t/", "");
+insert into words(word, phonemes, image_url) values ("cape", "/k/", "");
+insert into words(word, phonemes, image_url) values ("tape", "/t/", "");
+insert into words(word, phonemes, image_url) values ("cap", "/k/", "");
+insert into words(word, phonemes, image_url) values ("tap", "/t/", "");
+insert into words(word, phonemes, image_url) values ("car", "/k/", "");
+insert into words(word, phonemes, image_url) values ("tar", "/t/", "");
+insert into words(word, phonemes, image_url) values ("cool", "/k/", "");
+insert into words(word, phonemes, image_url) values ("tool", "/t/", "");
+insert into words(word, phonemes, image_url) values ("core", "/k/", "");
+insert into words(word, phonemes, image_url) values ("tore", "/t/", "");
+insert into words(word, phonemes, image_url) values ("key", "/k/", "");
+insert into words(word, phonemes, image_url) values ("tea", "/t/", "");
+insert into words(word, phonemes, image_url) values ("kick", "/k/", "");
+insert into words(word, phonemes, image_url) values ("tick", "/t/", "");
+insert into words(word, phonemes, image_url) values ("kite", "/k/", "");
+insert into words(word, phonemes, image_url) values ("tight", "/t/", "");
 
 -- /k/ and /g/ vs /d/ and /g/
-INSERT INTO words(word, phonemes, image_url) VALUES ("bad", "/d/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("bag", "/g/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("bike", "/k/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("bite", "/t/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("coat", "/k/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("coke", "/k/", "");
+insert into words(word, phonemes, image_url) values ("bad", "/d/", "");
+insert into words(word, phonemes, image_url) values ("bag", "/g/", "");
+insert into words(word, phonemes, image_url) values ("bike", "/k/", "");
+insert into words(word, phonemes, image_url) values ("bite", "/t/", "");
+insert into words(word, phonemes, image_url) values ("coat", "/k/", "");
+insert into words(word, phonemes, image_url) values ("coke", "/k/", "");
 
 -- Stopping of Fricatives
 -- /f/ vs /b/
-INSERT INTO words(word, phonemes, image_url) VALUES ("fair", "/f/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("bear", "/b/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("fig", "/f/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("big", "/b/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("phone", "/f/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("bone", "/b/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("fox", "/f/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("box", "/b/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("fun", "/f/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("bun", "/b/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("foal", "/f/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("bowl", "/b/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("fat", "/f/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("bat", "/b/", "");
+insert into words(word, phonemes, image_url) values ("fair", "/f/", "");
+insert into words(word, phonemes, image_url) values ("bear", "/b/", "");
+insert into words(word, phonemes, image_url) values ("fig", "/f/", "");
+insert into words(word, phonemes, image_url) values ("big", "/b/", "");
+insert into words(word, phonemes, image_url) values ("phone", "/f/", "");
+insert into words(word, phonemes, image_url) values ("bone", "/b/", "");
+insert into words(word, phonemes, image_url) values ("fox", "/f/", "");
+insert into words(word, phonemes, image_url) values ("box", "/b/", "");
+insert into words(word, phonemes, image_url) values ("fun", "/f/", "");
+insert into words(word, phonemes, image_url) values ("bun", "/b/", "");
+insert into words(word, phonemes, image_url) values ("foal", "/f/", "");
+insert into words(word, phonemes, image_url) values ("bowl", "/b/", "");
+insert into words(word, phonemes, image_url) values ("fat", "/f/", "");
+insert into words(word, phonemes, image_url) values ("bat", "/b/", "");
 
------- /f/ vs /p/
-INSERT INTO words(word, phonemes, image_url) VALUES ("pig", "/p/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("fin", "/f/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("pin", "/p/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("fan", "/f/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("pan", "/p/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("pole", "/p/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("fur", "/f/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("purr", "/p/", "");
+-- /f/ vs /p/
+insert into words(word, phonemes, image_url) values ("pig", "/p/", "");
+insert into words(word, phonemes, image_url) values ("fin", "/f/", "");
+insert into words(word, phonemes, image_url) values ("pin", "/p/", "");
+insert into words(word, phonemes, image_url) values ("fan", "/f/", "");
+insert into words(word, phonemes, image_url) values ("pan", "/p/", "");
+insert into words(word, phonemes, image_url) values ("pole", "/p/", "");
+insert into words(word, phonemes, image_url) values ("fur", "/f/", "");
+insert into words(word, phonemes, image_url) values ("purr", "/p/", "");
 
 -- /s/ vs /d/
-INSERT INTO words(word, phonemes, image_url) VALUES ("sore", "/s/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("door", "/d/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("sea", "/s/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("dee", "/d/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("sew", "/s/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("dough", "/d/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("suck", "/s/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("duck", "/d/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("sock", "/s/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("dock", "/d/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("cee", "/s/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("dee", "/d/", "");
+insert into words(word, phonemes, image_url) values ("sore", "/s/", "");
+insert into words(word, phonemes, image_url) values ("door", "/d/", "");
+insert into words(word, phonemes, image_url) values ("sea", "/s/", "");
+insert into words(word, phonemes, image_url) values ("dee", "/d/", "");
+insert into words(word, phonemes, image_url) values ("sew", "/s/", "");
+insert into words(word, phonemes, image_url) values ("dough", "/d/", "");
+insert into words(word, phonemes, image_url) values ("suck", "/s/", "");
+insert into words(word, phonemes, image_url) values ("duck", "/d/", "");
+insert into words(word, phonemes, image_url) values ("sock", "/s/", "");
+insert into words(word, phonemes, image_url) values ("dock", "/d/", "");
+insert into words(word, phonemes, image_url) values ("cee", "/s/", "");
+insert into words(word, phonemes, image_url) values ("dee", "/d/", "");
 
 -- /s/ vs /t/
-INSERT INTO words(word, phonemes, image_url) VALUES ("toe", "/t/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("tail", "/t/", "");
-INSERT INTO words(word, phonemes, image_url) VALUES ("tower", "/t/", "");
+insert into words(word, phonemes, image_url) values ("toe", "/t/", "");
+insert into words(word, phonemes, image_url) values ("tail", "/t/", "");
+insert into words(word, phonemes, image_url) values ("tower", "/t/", "");
+
+-- Dummy prescription
+insert into prescriptions(parent_id, therapist_id, session_time, session_word_count, session_word_set) values (1, 1, 15, 35, "1+2,3+4");
