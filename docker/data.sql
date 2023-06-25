@@ -86,6 +86,8 @@ create TABLE prescriptions(
     session_time int NOT NULL,
     session_word_count int NOT NULL,
     session_word_set VARCHAR(255) NOT NULL,
+    session_word_set_title VARCHAR(255) NOT NULL,
+    date_created datetime default NOW(),
     PRIMARY KEY(id)
 );
 
@@ -157,6 +159,7 @@ insert into words(word, phonemes, image_url) values ("coke", "/k/", "");
 insert into words(word, phonemes, image_url) values ("fair", "/f/", "");
 insert into words(word, phonemes, image_url) values ("bear", "/b/", "");
 insert into words(word, phonemes, image_url) values ("fig", "/f/", "");
+insert into words(word, phonemes, image_url) values ("fig", "/f/", "");
 insert into words(word, phonemes, image_url) values ("big", "/b/", "");
 insert into words(word, phonemes, image_url) values ("phone", "/f/", "");
 insert into words(word, phonemes, image_url) values ("bone", "/b/", "");
@@ -199,4 +202,4 @@ insert into words(word, phonemes, image_url) values ("tail", "/t/", "");
 insert into words(word, phonemes, image_url) values ("tower", "/t/", "");
 
 -- Dummy prescription
-insert into prescriptions(parent_id, therapist_id, session_time, session_word_count, session_word_set) values (1, 1, 15, 35, "1+2,3+4");
+insert into prescriptions(parent_id, therapist_id, session_time, session_word_count, session_word_set, session_word_set_title) values (1, 1, 15, 35, "1+2,3+4", "some title");
