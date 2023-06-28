@@ -125,26 +125,26 @@ insert into awards(parent_id, title, cost) values (1, "coca cola & chocolate", 3
 -- Words
 -- Velar Fronting
 -- /k/ vs /t/
-insert into words(word, phonemes, image_url) values ("call", "/k/", "");
-insert into words(word, phonemes, image_url) values ("tall", "/t/", "");
-insert into words(word, phonemes, image_url) values ("can", "/k/", "");
-insert into words(word, phonemes, image_url) values ("tan", "/t/", "");
-insert into words(word, phonemes, image_url) values ("cape", "/k/", "");
-insert into words(word, phonemes, image_url) values ("tape", "/t/", "");
-insert into words(word, phonemes, image_url) values ("cap", "/k/", "");
-insert into words(word, phonemes, image_url) values ("tap", "/t/", "");
-insert into words(word, phonemes, image_url) values ("car", "/k/", "");
-insert into words(word, phonemes, image_url) values ("tar", "/t/", "");
-insert into words(word, phonemes, image_url) values ("cool", "/k/", "");
-insert into words(word, phonemes, image_url) values ("tool", "/t/", "");
-insert into words(word, phonemes, image_url) values ("core", "/k/", "");
-insert into words(word, phonemes, image_url) values ("tore", "/t/", "");
-insert into words(word, phonemes, image_url) values ("key", "/k/", "");
-insert into words(word, phonemes, image_url) values ("tea", "/t/", "");
-insert into words(word, phonemes, image_url) values ("kick", "/k/", "");
-insert into words(word, phonemes, image_url) values ("tick", "/t/", "");
-insert into words(word, phonemes, image_url) values ("kite", "/k/", "");
-insert into words(word, phonemes, image_url) values ("tight", "/t/", "");
+insert into words(word, phonemes, image_url) values ("call", "/k/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/call.jpg");
+insert into words(word, phonemes, image_url) values ("tall", "/t/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/tall.jpg");
+insert into words(word, phonemes, image_url) values ("can", "/k/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/can.jpg");
+insert into words(word, phonemes, image_url) values ("tan", "/t/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/tan.jpg");
+insert into words(word, phonemes, image_url) values ("cape", "/k/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/cape.jpg");
+insert into words(word, phonemes, image_url) values ("tape", "/t/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/tape.jpg");
+insert into words(word, phonemes, image_url) values ("cap", "/k/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/cap.jpg");
+insert into words(word, phonemes, image_url) values ("tap", "/t/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/tap.jpg");
+insert into words(word, phonemes, image_url) values ("car", "/k/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/car.jpg");
+insert into words(word, phonemes, image_url) values ("tar", "/t/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/tar.jpg");
+insert into words(word, phonemes, image_url) values ("cool", "/k/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/cool.jpg");
+insert into words(word, phonemes, image_url) values ("tool", "/t/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/tool.jpg");
+insert into words(word, phonemes, image_url) values ("core", "/k/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/core.jpg");
+insert into words(word, phonemes, image_url) values ("tore", "/t/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/tore.jpg");
+insert into words(word, phonemes, image_url) values ("key", "/k/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/key.jpg");
+insert into words(word, phonemes, image_url) values ("tea", "/t/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/tea.jpg");
+insert into words(word, phonemes, image_url) values ("kick", "/k/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/kick.jpg");
+insert into words(word, phonemes, image_url) values ("tick", "/t/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/tick.jpg");
+insert into words(word, phonemes, image_url) values ("kite", "/k/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/kite.jpg");
+insert into words(word, phonemes, image_url) values ("tight", "/t/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/tight.jpg");
 
 -- /k/ and /g/ vs /d/ and /g/
 insert into words(word, phonemes, image_url) values ("bad", "/d/", "");
