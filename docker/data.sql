@@ -156,21 +156,20 @@ insert into words(word, phonemes, image_url) values ("coke", "/k/", "");
 
 -- Stopping of Fricatives
 -- /f/ vs /b/
-insert into words(word, phonemes, image_url) values ("fair", "/f/", "");
-insert into words(word, phonemes, image_url) values ("bear", "/b/", "");
-insert into words(word, phonemes, image_url) values ("fig", "/f/", "");
-insert into words(word, phonemes, image_url) values ("fig", "/f/", "");
-insert into words(word, phonemes, image_url) values ("big", "/b/", "");
-insert into words(word, phonemes, image_url) values ("phone", "/f/", "");
-insert into words(word, phonemes, image_url) values ("bone", "/b/", "");
-insert into words(word, phonemes, image_url) values ("fox", "/f/", "");
-insert into words(word, phonemes, image_url) values ("box", "/b/", "");
-insert into words(word, phonemes, image_url) values ("fun", "/f/", "");
-insert into words(word, phonemes, image_url) values ("bun", "/b/", "");
-insert into words(word, phonemes, image_url) values ("foal", "/f/", "");
-insert into words(word, phonemes, image_url) values ("bowl", "/b/", "");
-insert into words(word, phonemes, image_url) values ("fat", "/f/", "");
-insert into words(word, phonemes, image_url) values ("bat", "/b/", "");
+insert into words(word, phonemes, image_url) values ("fair", "/f/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/fair.jpg");
+insert into words(word, phonemes, image_url) values ("bear", "/b/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/bear.jpg");
+insert into words(word, phonemes, image_url) values ("fig", "/f/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/tight.jpg");
+insert into words(word, phonemes, image_url) values ("big", "/b/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/big.jpg");
+insert into words(word, phonemes, image_url) values ("phone", "/f/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/phone.jpg");
+insert into words(word, phonemes, image_url) values ("bone", "/b/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/bone.jpg");
+insert into words(word, phonemes, image_url) values ("fox", "/f/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/fox.jpg");
+insert into words(word, phonemes, image_url) values ("box", "/b/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/box.jpg");
+insert into words(word, phonemes, image_url) values ("fun", "/f/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/fun.jpg");
+insert into words(word, phonemes, image_url) values ("bun", "/b/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/bun.jpg");
+insert into words(word, phonemes, image_url) values ("foal", "/f/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/foal.jpg");
+insert into words(word, phonemes, image_url) values ("bowl", "/b/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/bowl.jpg");
+insert into words(word, phonemes, image_url) values ("fat", "/f/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/fat.jpg");
+insert into words(word, phonemes, image_url) values ("bat", "/b/", "https://mhealthstorageaccount.blob.core.windows.net/image-store/bat.jpg");
 
 -- /f/ vs /p/
 insert into words(word, phonemes, image_url) values ("pig", "/p/", "");
