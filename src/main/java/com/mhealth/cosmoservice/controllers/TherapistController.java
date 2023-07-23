@@ -1,6 +1,7 @@
 package main.java.com.mhealth.cosmoservice.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import main.java.com.mhealth.cosmoservice.models.Child;
 import main.java.com.mhealth.cosmoservice.models.Parent;
 import main.java.com.mhealth.cosmoservice.models.Therapist;
 import main.java.com.mhealth.cosmoservice.models.payloads.AccountId;
@@ -28,15 +29,15 @@ public class TherapistController {
     }
 
     @PostMapping("/patients")
-    public ArrayList<String> getAllTherapistsPatients(@RequestBody AccountId accountId) {
+    public ArrayList<Child> getAllTherapistsPatients(@RequestBody AccountId accountId) {
         var listOfAssocParents = accountService.getAllAssociatedParentsFor(accountId.getId());
-        var listOfChildrenNames = new ArrayList<String>();
+        var listOfChildPatients = new ArrayList<Child>();
         listOfAssocParents.forEach(parent -> {
             int parentId = Math.toIntExact(parent.getId());
             var child = accountService.getChildForParentId(parentId);
-            listOfChildrenNames.add(child.getFirstName());
+            listOfChildPatients.add(child);
         });
-        return listOfChildrenNames;
+        return listOfChildPatients;
     }
 
     @PostMapping("/patients/parents")
