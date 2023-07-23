@@ -48,7 +48,7 @@ create TABLE awards(
 create TABLE resources(
     id int NOT NULL AUTO_INCREMENT,
     title VARCHAR (255) NOT NULL,
-    content VARCHAR(255) NOT NULL,
+    content LONGTEXT NOT NULL,
     PRIMARY KEY(id)
 );
 
