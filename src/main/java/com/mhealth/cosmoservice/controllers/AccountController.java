@@ -3,10 +3,7 @@ package main.java.com.mhealth.cosmoservice.controllers;
 import lombok.extern.slf4j.Slf4j;
 import main.java.com.mhealth.cosmoservice.models.Account;
 import main.java.com.mhealth.cosmoservice.models.Award;
-import main.java.com.mhealth.cosmoservice.models.Child;
-import main.java.com.mhealth.cosmoservice.models.Parent;
 import main.java.com.mhealth.cosmoservice.models.payloads.AccountId;
-import main.java.com.mhealth.cosmoservice.models.payloads.AwardRequest;
 import main.java.com.mhealth.cosmoservice.models.payloads.NewAccount;
 import main.java.com.mhealth.cosmoservice.services.AccountService;
 import main.java.com.mhealth.cosmoservice.services.AwardsService;
@@ -63,7 +60,7 @@ public class AccountController {
             return accountService.findParentAccount(googleId).getId();
         } else if (accountType.equalsIgnoreCase("therapist")) {
             // TODO: Update this to therapist
-            return accountService.findTherapistAccount(googleId).getId();
+            return Long.valueOf(accountService.findTherapistAccount(googleId).getId());
         }
         return null;
     }
@@ -87,10 +84,10 @@ public class AccountController {
 
     @PostMapping("/awards/create")
     void createNewAward(@RequestBody Award award) {
-        var newAward = new Award();
-        newAward.setCost(award.getCost());
-        newAward.setParentId(award.getParentId());
-        newAward.setTitle(award.getTitle());
-        awardsService.createNewAward(newAward);
+//        var newAward = new Award();
+//        newAward.setCost(award.getCost());
+//        newAward.setParentId(award.getParentId());
+//        newAward.setTitle(award.getTitle());
+//        awardsService.createNewAward(newAward);
     }
 }

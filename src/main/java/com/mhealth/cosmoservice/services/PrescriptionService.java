@@ -1,11 +1,10 @@
 package main.java.com.mhealth.cosmoservice.services;
 
+import main.java.com.mhealth.cosmoservice.InMemoryDatabase;
 import main.java.com.mhealth.cosmoservice.models.Prescription;
 import main.java.com.mhealth.cosmoservice.models.Word;
 import main.java.com.mhealth.cosmoservice.models.WordPair;
 import main.java.com.mhealth.cosmoservice.models.payloads.PrescriptionRequest;
-import main.java.com.mhealth.cosmoservice.repositories.PrescriptionRepository;
-import main.java.com.mhealth.cosmoservice.repositories.WordRepository;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +16,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class PrescriptionService {
-    private WordRepository wordRepository;
-    private PrescriptionRepository prescriptionRepository;
     private Map<String, Map<String, List<Pair<Integer, Integer>>>> presets;
 
-    public PrescriptionService(WordRepository wordRepository, PrescriptionRepository prescriptionRepository) {
-        this.wordRepository = wordRepository;
-        this.prescriptionRepository = prescriptionRepository;
+    public PrescriptionService() {
 
         this.presets = new HashMap<>();
         var stoppingOfFricativesMap = new HashMap<String, List<Pair<Integer, Integer>>>();
@@ -51,7 +46,7 @@ public class PrescriptionService {
     }
 
     public List<Word> getAllWords() {
-        return wordRepository.findAll();
+        return InMemoryDatabase.WordsTable;
     }
 
     public List<String> getAllPhonologicalGroupings() {
@@ -75,28 +70,28 @@ public class PrescriptionService {
 
     private Pair<Word, Word> getWordPairFromIds(Pair<Integer, Integer> wordIdPair) {
         var firstWordId = wordIdPair.getFirst();
-        var firstWord = wordRepository.findById(firstWordId.longValue()).get();
+        var firstWord = InMemoryDatabase.WordsTable.stream().filter(word -> word.getId() == firstWordId).findFirst().orElse(null);
         var secondWordId = wordIdPair.getSecond();
-        var secondWord = wordRepository.findById(secondWordId.longValue()).get();
+        var secondWord = InMemoryDatabase.WordsTable.stream().filter(word -> word.getId() == secondWordId).findFirst().orElse(null);
         return Pair.of(firstWord, secondWord);
     }
 
     public List<Word> getFilteredWordsFromGroup(String phonologicalGroup) {
-        var allWords = wordRepository.findAll();
+        var allWords = InMemoryDatabase.WordsTable;
         return allWords.stream().filter(word -> word.getPhonemes().contains(phonologicalGroup)).collect(Collectors.toList());
     }
 
     public Prescription savePrescription(PrescriptionRequest prescriptionRequest) {
-        var prescription = new Prescription();
-        prescription.setParentId(1);
-        prescription.setTherapistId(prescriptionRequest.getTherapistId());
-        prescription.setSessionTime(prescriptionRequest.getSessionTime());
-        prescription.setSessionWordCount(prescriptionRequest.getSessionWordCount());
-        prescription.setSessionWordSet(prescriptionRequest.getSessionWordSet());
-        return prescriptionRepository.save(prescription);
+//        var prescription = new Prescription();
+//        prescription.setParentId(1);
+//        prescription.setTherapistId(prescriptionRequest.getTherapistId());
+//        prescription.setSessionTime(prescriptionRequest.getSessionTime());
+//        prescription.setSessionWordCount(prescriptionRequest.getSessionWordCount());
+//        prescription.setSessionWordSet(prescriptionRequest.getSessionWordSet());
+        return Prescription.builder().build();
     }
 
     public List<Prescription> getPrescriptionsForChild(int parentId) {
-        return prescriptionRepository.findByParentIdIs(parentId);
+        return InMemoryDatabase.PrescriptionTable.stream().filter(prescription -> prescription.getParentId() == parentId).collect(Collectors.toList());
     }
 }
